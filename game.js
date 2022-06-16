@@ -3,13 +3,16 @@ class Game {
     this.player = new Player();
     // we know the game will have several obstacles throughout its existence, so we make an array
     this.obstacles = [];
+    this.background = new Background();
   }
 
   preload() {
     this.player.preload();
+    this.background.preload();
   }
 
   play() {
+    this.background.drawBackground();
     this.player.drawPlayer();
 
     // 60fps (frames per second)

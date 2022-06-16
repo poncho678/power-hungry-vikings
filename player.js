@@ -5,9 +5,11 @@ class Player {
     this.width = 50;
     this.height = 50;
     this.velocity = 0;
-    this.floor = 400;
+    this.floor = 412;
     this.jumpCount = 0;
     this.bullet = "💩";
+    // shitHole
+    this.poopArray = [];
   }
 
   preload() {
@@ -23,9 +25,16 @@ class Player {
     this.jumpCount++;
   }
 
+  shootPoop() {
+    this.poopArray.push(new Poop(this.top + 40, this.left + 30));
+  }
+
   keyPressed() {
-    if (keyCode === SPACE_BAR) {
+    if (keyCode === ARROW_UP) {
       this.jump();
+    }
+    if (keyCode === SPACE_BAR) {
+      this.shootPoop();
     }
   }
 
@@ -41,9 +50,23 @@ class Player {
       this.velocity = 0;
       this.jumpCount = 0;
     }
+
+    this.poopArray.forEach((poopie) => {
+      poopie.throwPoopies();
+    });
+
+    this.flush();
   }
 
   hasReachedTheGround() {
     return this.top >= this.floor;
+  }
+
+  flush() {
+    this.poopArray.forEach((poopie, _, array) => {
+      if (poopie.left >= CANVAS_WIDTH) {
+        array.shift();
+      }
+    });
   }
 }
