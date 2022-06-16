@@ -7,7 +7,6 @@ class Player {
     this.velocity = 0;
     this.floor = 412;
     this.jumpCount = 0;
-    this.bullet = "💩";
     // shitHole
     this.poopArray = [];
   }
@@ -25,8 +24,16 @@ class Player {
     this.jumpCount++;
   }
 
+  geoffreysAssLocation() {
+    return {
+      top: this.top + 40,
+      left: this.left + 30,
+    };
+  }
+
   shootPoop() {
-    this.poopArray.push(new Poop(this.top + 40, this.left + 30));
+    const assLocation = this.geoffreysAssLocation();
+    this.poopArray.push(new Poop(assLocation.top, assLocation.left));
   }
 
   keyPressed() {
@@ -56,6 +63,41 @@ class Player {
     });
 
     this.flush();
+
+    if (keyIsDown(ENTER_KEY)) {
+      this.createDiarrhea();
+      this.moveLiquidPoopOnEnter();
+    } else {
+      this.begonePoopieNeedToCleanTheWhatWhatTheButt();
+    }
+  }
+
+  begonePoopieNeedToCleanTheWhatWhatTheButt() {
+    if (this.diarrhea) {
+      const noLongerInGeoffreysButt = false;
+      this.diarrhea.drawLiquidPoop(noLongerInGeoffreysButt, this.tookImodium());
+      // this.diarrhea.drawLiquidPoop(noLongerInGeoffreysButt, console.log);
+    }
+  }
+
+  createDiarrhea() {
+    if (!this.diarrhea) {
+      this.diarrhea = new Diarrhea();
+    }
+  }
+
+  moveLiquidPoopOnEnter() {
+    const assLocation = this.geoffreysAssLocation();
+    this.diarrhea.followGeoggreysAss(assLocation.left, assLocation.top);
+    this.diarrhea.drawLiquidPoop(true);
+  }
+
+  tookImodium() {
+    return () => {
+      if (this.diarrhea) {
+        this.diarrhea = null;
+      }
+    };
   }
 
   hasReachedTheGround() {

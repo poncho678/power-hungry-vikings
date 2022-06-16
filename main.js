@@ -20,3 +20,11 @@ function preload() {
 function keyPressed() {
   game.keyPressed();
 }
+
+const whatever = new Diarrhea();
+
+function heyPelayo() {
+  console.log("HEYA GOOD LOOKING");
+}
+
+whatever.drawLiquidPoop(false, heyPelayo);
