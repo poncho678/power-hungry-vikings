@@ -16,3 +16,7 @@ function preload() {
   vikingImagePowerfulAndStrong = loadImage("./images/character-right.png");
   //   img = loadImage("./images/character-right.png");
 }
+
+function keyPressed() {
+  game.keyPressed();
+}

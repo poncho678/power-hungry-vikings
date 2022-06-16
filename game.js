@@ -30,4 +30,8 @@ class Game {
       }
     });
   }
+
+  keyPressed() {
+    this.player.keyPressed();
+  }
 }
