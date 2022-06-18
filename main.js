@@ -13,7 +13,7 @@ function draw() {
 
 function preload() {
   game.preload();
-  vikingImagePowerfulAndStrong = loadImage("./images/character-right.png");
+  // vikingImagePowerfulAndStrong = loadImage("./images/character-right.png");
   //   img = loadImage("./images/character-right.png");
 }
 
@@ -21,10 +21,10 @@ function keyPressed() {
   game.keyPressed();
 }
 
-const whatever = new Diarrhea();
+// const whatever = new Diarrhea();
 
-function heyPelayo() {
-  console.log("HEYA GOOD LOOKING");
-}
+// function heyPelayo() {
+//   console.log("HEYA GOOD LOOKING");
+// }
 
-whatever.drawLiquidPoop(false, heyPelayo);
+// whatever.drawLiquidPoop(false, heyPelayo);

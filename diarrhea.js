@@ -34,19 +34,3 @@ class Diarrhea {
     return this.left >= CANVAS_WIDTH;
   }
 }
-
-function map(array, callback) {
-  const arr = [];
-
-  for (let i = 0; i < array.length; i++) {
-    const result = callback(array[i], i, array);
-
-    arr.push(result);
-  }
-
-  return arr;
-}
-
-// [].filter(el => {
-// 	return el.whatever === true
-// })

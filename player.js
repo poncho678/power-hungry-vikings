@@ -15,6 +15,15 @@ class Player {
     this.img = loadImage("./images/character-left.png");
   }
 
+  keyPressed() {
+    if (keyCode === ARROW_UP) {
+      this.jump();
+    }
+    if (keyCode === SPACE_BAR) {
+      this.shootPoop();
+    }
+  }
+
   jump() {
     if (this.jumpCount === 2) {
       return;
@@ -24,25 +33,16 @@ class Player {
     this.jumpCount++;
   }
 
-  geoffreysAssLocation() {
-    return {
-      top: this.top + 40,
-      left: this.left + 30,
-    };
-  }
-
   shootPoop() {
     const assLocation = this.geoffreysAssLocation();
     this.poopArray.push(new Poop(assLocation.top, assLocation.left));
   }
 
-  keyPressed() {
-    if (keyCode === ARROW_UP) {
-      this.jump();
-    }
-    if (keyCode === SPACE_BAR) {
-      this.shootPoop();
-    }
+  geoffreysAssLocation() {
+    return {
+      top: this.top + 40,
+      left: this.left + 30,
+    };
   }
 
   drawPlayer() {
@@ -80,6 +80,14 @@ class Player {
     }
   }
 
+  tookImodium() {
+    return () => {
+      if (this.diarrhea) {
+        this.diarrhea = null;
+      }
+    };
+  }
+
   createDiarrhea() {
     if (!this.diarrhea) {
       this.diarrhea = new Diarrhea();
@@ -89,15 +97,11 @@ class Player {
   moveLiquidPoopOnEnter() {
     const assLocation = this.geoffreysAssLocation();
     this.diarrhea.followGeoggreysAss(assLocation.left, assLocation.top);
-    this.diarrhea.drawLiquidPoop(true);
-  }
 
-  tookImodium() {
-    return () => {
-      if (this.diarrhea) {
-        this.diarrhea = null;
-      }
-    };
+    const isDiarrheaStillAttachedToGeoffreyOurChinlessVikingsButt = true;
+    this.diarrhea.drawLiquidPoop(
+      isDiarrheaStillAttachedToGeoffreyOurChinlessVikingsButt
+    );
   }
 
   hasReachedTheGround() {
@@ -105,10 +109,14 @@ class Player {
   }
 
   flush() {
-    this.poopArray.forEach((poopie, _, array) => {
-      if (poopie.left >= CANVAS_WIDTH) {
-        array.shift();
-      }
-    });
+    this.poopArray = this.poopArray.filter(
+      (poopie) => poopie.left <= CANVAS_WIDTH
+    );
   }
 }
+//  this was the previous flush implementation, we found better plumbing, so now we can remove poopies more effectively
+// this.poopArray.forEach((poopie, _, array) => {
+//   if (poopie.left >= CANVAS_WIDTH) {
+//     array.shift();
+//   }
+// });
