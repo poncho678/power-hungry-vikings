@@ -24,14 +24,20 @@ class Game {
       this.obstacles.push(new Obstacle());
     }
 
-    this.obstacles.forEach((obstacle, index) => {
+    this.obstacles = this.obstacles.filter((obstacle) => {
       obstacle.drawObstacle();
 
-      //   if (obstacle.left <= 0 - obstacle.width)
-      if (obstacle.left <= -obstacle.width) {
-        this.obstacles.splice(index, 1);
-      }
+      return obstacle.left >= -obstacle.width;
     });
+
+    // this.obstacles.forEach((obstacle, index) => {
+    //   obstacle.drawObstacle();
+
+    //   //   if (obstacle.left <= 0 - obstacle.width)
+    //   if (obstacle.left <= -obstacle.width) {
+    //     this.obstacles.splice(index, 1);
+    //   }
+    // });
   }
 
   keyPressed() {
