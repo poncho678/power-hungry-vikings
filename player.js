@@ -5,8 +5,8 @@ class Player {
     this.width = 50;
     this.height = 50;
     this.velocity = 0;
-    this.floor = 412;
     this.jumpCount = 0;
+    this.movespeed = 5;
     // shitHole
     this.poopArray = [];
   }
@@ -33,6 +33,19 @@ class Player {
     this.jumpCount++;
   }
 
+  move(key) {
+    if (key === ARROW_LEFT) {
+      if (this.left >= 0) {
+        this.left -= this.movespeed;
+      }
+    }
+    if (key === ARROW_RIGHT) {
+      if (this.left <= CANVAS_WIDTH - this.width) {
+        this.left += this.movespeed;
+      }
+    }
+  }
+
   shootPoop() {
     const assLocation = this.geoffreysAssLocation();
     this.poopArray.push(new Poop(assLocation.top, assLocation.left));
@@ -53,7 +66,7 @@ class Player {
 
     // whenever geoffrey, our chinless viking, reaches the floor, it stops falling. we say that geoffrey, our chinless viking, wont go anywhere below the floor and now gravity wont pull geoffrey, our chinless viking, with more strength. he is not falling
     if (this.hasReachedTheGround()) {
-      this.top = this.floor;
+      this.top = CANVAS_FLOOR;
       this.velocity = 0;
       this.jumpCount = 0;
     }
@@ -63,6 +76,13 @@ class Player {
     });
 
     this.flush();
+
+    if (keyIsDown(ARROW_LEFT)) {
+      this.move(ARROW_LEFT);
+    }
+    if (keyIsDown(ARROW_RIGHT)) {
+      this.move(ARROW_RIGHT);
+    }
 
     if (keyIsDown(ENTER_KEY)) {
       this.createDiarrhea();
@@ -105,7 +125,7 @@ class Player {
   }
 
   hasReachedTheGround() {
-    return this.top >= this.floor;
+    return this.top >= CANVAS_FLOOR;
   }
 
   flush() {
